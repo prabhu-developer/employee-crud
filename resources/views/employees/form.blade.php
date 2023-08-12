@@ -68,9 +68,9 @@
 <div class="col-md-4">
     <div class="d-flex align-items-center justify-content-end">
         <div class="form-check form-switch me-3">
-            <input class="form-check-input" name="is_active" value="1" type="checkbox" role="switch"
-                id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault"> Status </label>
+            <input class="form-check-input" name="is_active" {{ ($employee->is_active ?? null) ? 'checked' : '' }}  value="1" type="checkbox" role="switch"
+                id="employeeCheckBox">
+            <label class="form-check-label" for="employeeCheckBox"> Status </label>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary">
     </div>

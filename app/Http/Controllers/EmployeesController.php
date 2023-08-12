@@ -48,6 +48,9 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
+        if(!$request->has('is_active')) {
+            $request['is_active'] = 0;
+        }
         $employee = $this->updateOrCreate($request->except(['_token', 'avatar']));
         if ($request->has('avatar')) {
             $path = $this->putFiles($request->avatar);
@@ -88,6 +91,9 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {  
+        if(!$request->has('is_active')) {
+            $request['is_active'] = 0;
+        }
         $employee = $this->updateOrCreate($request->except(['_token', 'avatar','_method']), $id);
         if ($request->has('avatar')) {
             $path = $this->putFiles($request->avatar);
