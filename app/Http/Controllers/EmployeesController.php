@@ -24,7 +24,7 @@ class EmployeesController extends Controller
         if ($request->ajax()) {
             return $this->employees_datatable($request);
         }
-        return back();
+        return view('employees.index');
     }
 
     /**
@@ -34,7 +34,7 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
     /**
@@ -67,7 +67,8 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = $this->modal->findOrFail($id);
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -98,21 +99,20 @@ class EmployeesController extends Controller
         $employees = $this->modal->with(['department'])->select('*');
         return DataTables::of($employees)
             ->addIndexColumn()
-            ->editColumn('avatar', function ($row) { 
-                return has_image($row->avatar);
+            ->editColumn('avatar', function ($employee) { 
+                return has_image($employee->avatar,'rounded-pill w-100');
             })
-            ->editColumn('is_active', function ($row) { 
-                if($row->is_active) {
+            ->editColumn('is_active', function ($employee) { 
+                if($employee->is_active) {
                     return '<span class="badge bg-success">Active</span>';
                 }
                 return '<span class="badge bg-danger">In-active</span>';
             })
-            ->addColumn('emp_code', function ($row) {
-                return "EMP".$row->id;
+            ->addColumn('emp_code', function ($employee) {
+                return "EMP".$employee->id;
             })
-            ->addColumn('action', function ($row) {
-                $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                return $btn;
+            ->addColumn('action', function ($employee) {
+                return view('employees.actions', compact('employee'));
             })
             ->rawColumns(['action','emp_code','avatar','is_active'])
             ->make(true);

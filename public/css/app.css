@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css);
 @charset "UTF-8";
 /*!
  * Bootstrap  v5.3.1 (https://getbootstrap.com/)
@@ -11984,4 +11985,8 @@ body {
 
 .card .table > :not(caption) > * > * {
   background-color: white !important;
+}
+
+.w-40px {
+  width: 40px;
 }

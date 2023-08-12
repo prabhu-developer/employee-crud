@@ -7,7 +7,10 @@
 @section('content')
     <div class="container">
         <div class="card bg-white">
-            <div class="card-header">Employees</div>
+            <div class="card-header fw-bold">
+                Employees
+                <a href="{{ route('employee.create') }}" class="btn btn-primary float-end"><i class="bi bi-plus me-1"></i> Create</a>
+            </div>
             <div class="card-body">
                 <table class="table table-centered" id="users-table">
                     <thead>
