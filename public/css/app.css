@@ -11981,3 +11981,7 @@ body {
   display: grid;
   place-items: center;
 }
+
+.card .table > :not(caption) > * > * {
+  background-color: white !important;
+}

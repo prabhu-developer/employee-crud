@@ -25,4 +25,8 @@ class Employees extends Model
         'avatar',
         'is_active'
     ];
+
+    public function department() {
+        return $this->belongsTo(Departments::class);
+    }
 }

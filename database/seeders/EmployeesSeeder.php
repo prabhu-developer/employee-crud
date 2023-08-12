@@ -28,7 +28,7 @@ class EmployeesSeeder extends Seeder
             ],
             [
                 'name'             => "Paki Wolf",
-                'department_id'    => 1,
+                'department_id'    => 2,
                 'designation'      => "Marketing  Manager",
                 'mobile'           => "9565788164",
                 'salary'           => 40000,

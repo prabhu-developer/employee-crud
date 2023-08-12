@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @stack('styles')
 </head>
 <body>
     <div id="app">
@@ -79,5 +81,8 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    @stack('scripts')
 </body>
 </html>
