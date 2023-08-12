@@ -4,6 +4,7 @@ use App\Models\BloodGroup;
 use App\Models\Departments;
 use App\Models\Gender;
 use App\Models\Religion;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('format_date')) {
     function format_date($date, $format = 'Y-m-d')
@@ -16,14 +17,17 @@ if (!function_exists('format_date')) {
 if (!function_exists('has_image')) {
     function has_image($avatar,$class=null)
     {
-        if (is_null($avatar)) {
+        if (is_null($avatar) && !(Storage::exists($avatar))) {
             $no_image = asset('images/no-user-image.jpg');
-            
             return "<img src='$no_image' class='$class' />";
         }
+        // return Storage::exists($avatar);
+        $avatar = asset('/storage/app/public/'.$avatar);
         return "<img src='$avatar' class='$class' />";
     }
 }
+
+
 
 if (!function_exists('genders')) {
     function genders()

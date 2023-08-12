@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\FileSystem;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use DataTables;
 
 class EmployeesController extends Controller
 {
+    use FileSystem;
     protected $modal;
 
     public function __construct(Employees $modal)
@@ -22,7 +24,8 @@ class EmployeesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return $this->employees_datatable($request);
+            $employees = $this->modal->with(['department'])->select('*');
+            return $this->datatable($employees);
         }
         return view('employees.index');
     }
@@ -45,7 +48,12 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = $this->updateOrCreate($request->except(['_token', 'avatar']));
+        if ($request->has('avatar')) {
+            $path = $this->putFiles($request->avatar);
+            $employee->update(['avatar' => $path]);
+        }
+        return  redirect(route('employee.index'))->withSuccess('Employee Created!');
     }
 
     /**
@@ -79,8 +87,13 @@ class EmployeesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {  
+        $employee = $this->updateOrCreate($request->except(['_token', 'avatar','_method']), $id);
+        if ($request->has('avatar')) {
+            $path = $this->putFiles($request->avatar);
+            $employee->update(['avatar' => $path]);
+        }
+        return  redirect(route('employee.index'))->withSuccess('Employee Updated!');
     }
 
     /**
@@ -94,27 +107,31 @@ class EmployeesController extends Controller
         //
     }
 
-    public function employees_datatable($request)
+    public function updateOrCreate($request, $id=null)
     {
-        $employees = $this->modal->with(['department'])->select('*');
+        return $this->modal->updateOrCreate(['id' => $id], $request);
+    }
+
+    public function datatable($employees)
+    {
         return DataTables::of($employees)
             ->addIndexColumn()
-            ->editColumn('avatar', function ($employee) { 
-                return has_image($employee->avatar,'rounded-pill w-100');
+            ->editColumn('avatar', function ($employee) {
+                return has_image($employee->avatar, 'rounded-pill w-40px shadow-sm border');
             })
-            ->editColumn('is_active', function ($employee) { 
-                if($employee->is_active) {
+            ->editColumn('is_active', function ($employee) {
+                if ($employee->is_active) {
                     return '<span class="badge bg-success">Active</span>';
                 }
                 return '<span class="badge bg-danger">In-active</span>';
             })
             ->addColumn('emp_code', function ($employee) {
-                return "EMP".$employee->id;
+                return "EMP" . $employee->id;
             })
             ->addColumn('action', function ($employee) {
                 return view('employees.actions', compact('employee'));
             })
-            ->rawColumns(['action','emp_code','avatar','is_active'])
+            ->rawColumns(['action', 'emp_code', 'avatar', 'is_active'])
             ->make(true);
     }
 }

@@ -7,9 +7,13 @@
                 Create an employee
             </div>
             <div class="card-body">
-                    {!! Form::open(['route' => 'employee.store', 'class' => 'row align-items-end']) !!}
-                    @include('employees.form')
-                    {!! Form::close() !!}
+                {!! Form::open([
+                    'route' => 'employee.store',
+                    'enctype' => 'multipart/form-data',
+                    'class' => 'row align-items-end',
+                ]) !!}
+                @include('employees.form')
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

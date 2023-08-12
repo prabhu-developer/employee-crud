@@ -8,28 +8,28 @@
 </div>
 <div class="col-md-4 py-1">
     {!! Form::label('gender', 'Gender', ['class' => 'text-secondary']) !!}
-    {!! Form::select('gender', ['' => 'Select an option'] + genders(), $employee->gender_id ?? null, [
+    {!! Form::select('gender_id', ['' => 'Select an option'] + genders(), $employee->gender_id ?? null, [
         'class' => 'form-select',
         'required',
     ]) !!}
 </div>
 <div class="col-md-4 py-1">
     {!! Form::label('blood_group', 'Blood group', ['class' => 'text-secondary']) !!}
-    {!! Form::select('blood_group', ['' => 'Select an option'] + blood_groups(), $employee->blood_group_id ?? null, [
+    {!! Form::select('blood_group_id', ['' => 'Select an option'] + blood_groups(), $employee->blood_group_id ?? null, [
         'class' => 'form-select',
         'required',
     ]) !!}
 </div>
 <div class="col-md-4 py-1">
     {!! Form::label('religion', 'Religion', ['class' => 'text-secondary']) !!}
-    {!! Form::select('religion', ['' => 'Select an option'] + religion(), $employee->religion_id ?? null, [
+    {!! Form::select('religion_id', ['' => 'Select an option'] + religion(), $employee->religion_id ?? null, [
         'class' => 'form-select',
         'required',
     ]) !!}
 </div>
 <div class="col-md-4 py-1">
     {!! Form::label('department', 'Department', ['class' => 'text-secondary']) !!}
-    {!! Form::select('department', ['' => 'Select an option'] + departments(), $employee->department_id ?? null, [
+    {!! Form::select('department_id', ['' => 'Select an option'] + departments(), $employee->department_id ?? null, [
         'class' => 'form-select',
         'required',
     ]) !!}

@@ -7,7 +7,11 @@
                 Edit an employee
             </div>
             <div class="card-body">
-                {!! Form::model($employee, ['route' => ['employee.update', $employee->id], 'class' => 'row align-items-end']) !!}
+                {!! Form::model($employee, [
+                    'enctype' => 'multipart/form-data',
+                    'route' => ['employee.update', $employee->id],
+                    'class' => 'row align-items-end',
+                ]) !!}
                 @method('PUT')
                 @include('employees.form')
                 {!! Form::close() !!}
