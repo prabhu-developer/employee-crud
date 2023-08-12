@@ -1,0 +1,16 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+body {
+    background-color: #f8fafc;
+}
+.layout-center {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
