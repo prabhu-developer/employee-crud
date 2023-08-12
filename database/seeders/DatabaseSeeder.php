@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
             DepartmentsSeeder::class,
             GenderSeeder::class,
             BloodGroupSeeder::class,
-            ReligionSeeder::class
+            ReligionSeeder::class,
+            EmployeesSeeder::class
         ]); 
     }
 }
