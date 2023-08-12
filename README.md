@@ -1,6 +1,4 @@
-# Laravel ToDo App
-
-This is a simple ToDo app with multiple user support.
+# Laravel Employees CRUD
 
 This is built on Laravel Framework 8.1. This was built for demonstrate purpose.
 
