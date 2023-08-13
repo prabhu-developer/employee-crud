@@ -40,6 +40,7 @@ class EmployeeRequest extends FormRequest
             "appointment_date" => "required",
             "join_date"        => "required",
             "address"          => "max:500",
+            'avatar'           => 'file|max:1024', // 1MB max
         ];
     }
 }

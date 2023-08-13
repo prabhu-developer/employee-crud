@@ -110,6 +110,7 @@ class EmployeesController extends Controller
         }
         $employee = $this->updateOrCreate($request->except(['_token', 'avatar','_method']), $id);
         if ($request->has('avatar')) {
+            $this->deleteFiles($employee->avatar);  // delete old files
             $path = $this->putFiles($request->avatar);
             $employee->update(['avatar' => $path]);
         }
