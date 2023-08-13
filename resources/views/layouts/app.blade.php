@@ -8,10 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'Emp CRUD') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -83,31 +80,17 @@
         </nav>
 
         <main class="py-4">
+            @include('components.breadcrumb')
             @yield('content')
         </main>
     </div>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script> 
-        toastr.options = {
-            "closeButton": true,
-            "debug": true,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": true,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-    </script>
+    @stack('scripts')
     @if (session('success'))
         <script>
             toastr.success("{{ session('success') }}")
@@ -130,7 +113,6 @@
             </script>
         @endforeach
     @endif
-    @stack('scripts')
 </body>
 
 </html>

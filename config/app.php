@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'emp_code_prefix'=> "EMP",
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

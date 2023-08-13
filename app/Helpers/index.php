@@ -6,13 +6,22 @@ use App\Models\Gender;
 use App\Models\Religion;
 use Illuminate\Support\Facades\Storage;
 
-if (!function_exists('format_date')) {
-    function format_date($date, $format = 'Y-m-d')
+if (!function_exists('emp_status')) {
+    function emp_status($is_active)
     {
-        return date($format, strtotime($date));
+        if ($is_active) {
+            return '<span class="badge bg-success">Active</span>';
+        }
+        return '<span class="badge bg-danger">In-active</span>';
     }
 }
 
+if (!function_exists('emp_code')) {
+    function emp_code($employee_id)
+    {
+        return config('app.emp_code_prefix') . $employee_id;
+    }
+}
 
 if (!function_exists('has_image')) {
     function has_image($avatar,$class=null)

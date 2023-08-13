@@ -80,7 +80,8 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = $this->modal->findOrFail($id);
+        return view('employees.show', compact('employee'));
     }
 
     /**
@@ -146,14 +147,11 @@ class EmployeesController extends Controller
             ->editColumn('avatar', function ($employee) {
                 return has_image($employee->avatar, 'rounded-pill w-40px shadow-sm border');
             })
-            ->editColumn('is_active', function ($employee) {
-                if ($employee->is_active) {
-                    return '<span class="badge bg-success">Active</span>';
-                }
-                return '<span class="badge bg-danger">In-active</span>';
+            ->editColumn('is_active', function ($employee) { 
+                return emp_status($employee->is_active);
             })
             ->addColumn('emp_code', function ($employee) {
-                return "EMP" . $employee->id;
+                return emp_code($employee->id);
             })
             ->addColumn('action', function ($employee) {
                 return view('employees.actions', compact('employee'));

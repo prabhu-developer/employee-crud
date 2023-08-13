@@ -29,4 +29,13 @@ class Employees extends Model
     public function department() {
         return $this->belongsTo(Departments::class);
     }
+    public function gender() {
+        return $this->belongsTo(Gender::class);
+    }
+    public function bloodGroup() {
+        return $this->belongsTo(BloodGroup::class);
+    }
+    public function religion() {
+        return $this->belongsTo(Religion::class);
+    }
 }
