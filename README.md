@@ -36,27 +36,19 @@ copy paste the .env.example file in your project directory and rename the file .
 
 Then edit `.env` file with appropriate credential for your database server. Just edit these two parameter(`DB_USERNAME`, `DB_PASSWORD`).
 
-Then create a database named `employee_crud` and then do a database migration using this command-
+Then create a database named `employee_crud` and then do a database migration & seeding using this command-
 ```
 php artisan migrate
 ```
-
+```
+php artisan db:seed
+```
 
 At last generate application key, which will be used for password hashing, session and cookie encryption etc.
 ```
 php artisan key:generate
 
 ```
- 
-
-## Run server
-
-Run server using this command-
-```
-php artisan serve
-```
-
-Then go to `http://localhost:8000` from your browser and see the app.
 
 ## Ask a question?
 

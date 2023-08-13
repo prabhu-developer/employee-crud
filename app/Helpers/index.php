@@ -27,10 +27,10 @@ if (!function_exists('emp_image')) {
     function emp_image($avatar,$class=null)
     {
         if (is_null($avatar) && !(Storage::exists($avatar))) {
-            $no_image = asset('images/no-user-image.jpg');
+            $no_image = asset('public/images/no-user-image.jpg');
             return "<img src='$no_image' class='$class' />";
         }
-        $avatar = asset('/storage/app/public/'.$avatar);
+        $avatar = asset('public/storage/'.$avatar);
         return "<img src='$avatar' class='$class' />";
     }
 }
