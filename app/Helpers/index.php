@@ -23,8 +23,8 @@ if (!function_exists('emp_code')) {
     }
 }
 
-if (!function_exists('has_image')) {
-    function has_image($avatar,$class=null)
+if (!function_exists('emp_image')) {
+    function emp_image($avatar,$class=null)
     {
         if (is_null($avatar) && !(Storage::exists($avatar))) {
             $no_image = asset('images/no-user-image.jpg');

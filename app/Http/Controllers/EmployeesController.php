@@ -7,7 +7,6 @@ use App\Http\Requests\EmployeeRequest;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use DataTables;
-use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -125,10 +124,8 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        $employee = $this->modal->findOrFail($id);
-        if(!is_null($employee) & Storage::exists($employee->avatar)) {
-            Storage::delete($employee->avatar);
-        }
+        $employee = $this->modal->findOrFail($id); 
+        $this->deleteFiles($employee->avatar); 
         $employee->delete();
         return response([
             'status' => true,
@@ -146,7 +143,7 @@ class EmployeesController extends Controller
         return DataTables::of($employees)
             ->addIndexColumn()
             ->editColumn('avatar', function ($employee) {
-                return has_image($employee->avatar, 'rounded-pill w-40px shadow-sm border');
+                return emp_image($employee->avatar, 'rounded-pill w-40px shadow-sm border');
             })
             ->editColumn('is_active', function ($employee) { 
                 return emp_status($employee->is_active);

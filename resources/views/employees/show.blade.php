@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 text-center">
-                        {!! has_image($employee->avatar, 'rounded-pill w-100 shadow-sm border') !!}
+                        {!! emp_image($employee->avatar, 'rounded-pill w-100 shadow-sm border') !!}
                         <div class="lead mt-2">{{ $employee->name }}</div>
                     </div>
                     <div class="col">

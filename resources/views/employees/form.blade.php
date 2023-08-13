@@ -57,7 +57,7 @@
 <div class="col-md-4 py-1">
     {!! Form::label('avatar', 'Profile', ['class' => 'text-secondary']) !!}
     <div class="d-flex">
-        {!! has_image($employee->avatar ?? null, 'rounded-pill w-40px me-2') !!}
+        {!! emp_image($employee->avatar ?? null, 'rounded-pill w-40px me-2') !!}
         {!! Form::file('avatar', ['class' => 'form-control']) !!}
     </div>
 </div>
