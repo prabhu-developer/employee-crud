@@ -13,12 +13,12 @@
                 <i class="bi bi-pencil-square me-2"></i> Edit
             </a>
         </li>
-        
+
         <li>
-            <a class="dropdown-item text-danger" href="{{ route('employee.edit', $employee->id) }}">
+            <button class="dropdown-item text-danger delete-button"
+                url="{{ route('employee.destroy', $employee->id) }}">
                 <i class="bi bi-trash-fill"></i> Delete
-            </a>
+            </button>
         </li>
     </ul>
 </div>
- 

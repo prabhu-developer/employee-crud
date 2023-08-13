@@ -6,6 +6,7 @@ use App\Helpers\FileSystem;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeesController extends Controller
 {
@@ -24,7 +25,19 @@ class EmployeesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $employees = $this->modal->with(['department'])->select('*');
+            $employees = $this->modal->with(['department'])->select([
+                'id',
+                'name',
+                'department_id',
+                'designation',
+                'mobile',
+                'salary',
+                'birth_date',
+                'appointment_date',
+                'join_date',
+                'avatar',
+                'is_active'
+            ]);
             return $this->datatable($employees);
         }
         return view('employees.index');
@@ -110,7 +123,15 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = $this->modal->findOrFail($id);
+        if(!is_null($employee) & Storage::exists($employee->avatar)) {
+            Storage::delete($employee->avatar);
+        }
+        $employee->delete();
+        return response([
+            'status' => true,
+            'message' =>'Employee Deleted!'
+        ], 200);
     }
 
     public function updateOrCreate($request, $id=null)

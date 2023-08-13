@@ -9,10 +9,11 @@
         <div class="card bg-white">
             <div class="card-header fw-bold">
                 Employees
-                <a href="{{ route('employee.create') }}" class="btn btn-primary float-end"><i class="bi bi-plus me-1"></i> Create</a>
+                <a href="{{ route('employee.create') }}" class="btn btn-primary float-end"><i class="bi bi-plus me-1"></i>
+                    Create</a>
             </div>
             <div class="card-body">
-                <table class="table table-centered" id="users-table">
+                <table class="table table-centered" id="employees-table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -21,8 +22,8 @@
                             <th>Emp ID</th>
                             <th>Department</th>
                             <th>Designation</th>
-                            <th>Total Salary</th>
-                            <th>Contact Number</th>
+                            <th>Salary</th>
+                            <th>Mobile</th>
                             <th>Birth Date</th>
                             <th>Join Date</th>
                             <th>Status</th>
@@ -40,10 +41,11 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-            const employeeTable = $('#users-table').DataTable({
+            const employeeTable = $('#employees-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('employee.index') !!}',
+                order: [[0, "desc"]],
+                ajax: `{!! route('employee.index') !!}`,
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'id'
@@ -92,9 +94,37 @@
                         data: 'action',
                         name: 'action'
                     },
-                    
+
                 ]
             });
+            $('#employees-table').on('click', '.delete-button', function() {
+                const buttonId = this.id;
+                const url = this.attributes.url.value;
+                Swal.fire({
+                    title: "Are you sure!",
+                    text: "you want to delete this item?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios({
+                            method: "DELETE",
+                            url:url,
+                        }).then(function(response) {
+                            if (response.data.status) {
+                                $('#employees-table').DataTable().ajax.reload();
+                                toastr.success(response.data.message)
+                            } else {
+                                toastr.error(response.data.message)
+                            }
+                        });
+                    }
+                })
+            });
+
+           
         });
     </script>
 @endpush

@@ -21,7 +21,6 @@ if (!function_exists('has_image')) {
             $no_image = asset('images/no-user-image.jpg');
             return "<img src='$no_image' class='$class' />";
         }
-        // return Storage::exists($avatar);
         $avatar = asset('/storage/app/public/'.$avatar);
         return "<img src='$avatar' class='$class' />";
     }
@@ -32,21 +31,21 @@ if (!function_exists('has_image')) {
 if (!function_exists('genders')) {
     function genders()
     {
-        return  Gender::pluck('name', 'id')->toArray();
+        return  Gender::where('is_active',true)->pluck('name', 'id')->toArray();
     }
 }
 
 if (!function_exists('departments')) {
     function departments()
     {
-        return Departments::pluck('name', 'id')->toArray();
+        return Departments::where('is_active',true)->pluck('name', 'id')->toArray();
     }
 }
 
 if (!function_exists('blood_groups')) {
     function blood_groups()
     {
-        return BloodGroup::pluck('name', 'id')->toArray();
+        return BloodGroup::where('is_active',true)->pluck('name', 'id')->toArray();
     }
 }
 
@@ -54,7 +53,7 @@ if (!function_exists('blood_groups')) {
 if (!function_exists('religion')) {
     function religion()
     {
-        return Religion::pluck('name', 'id')->toArray();
+        return Religion::where('is_active',true)->pluck('name', 'id')->toArray();
     }
 }
 
