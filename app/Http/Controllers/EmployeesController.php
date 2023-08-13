@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\FileSystem;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use DataTables;
@@ -59,7 +60,7 @@ class EmployeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         if(!$request->has('is_active')) {
             $request['is_active'] = 0;
